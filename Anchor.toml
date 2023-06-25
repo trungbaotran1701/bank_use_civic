@@ -1,0 +1,18 @@
+[workspace]
+types = "app/src/lib/types"
+
+[features]
+seeds = false
+skip-lint = false
+[programs.localnet]
+bank_use_civic = "3jUJRJARegMt4ufJ4Bu1UTXRtBszzNqRZ7vrneHxn57R"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "Localnet"
+wallet = "/home/trung1701/.config/solana/id.json"
+
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
