@@ -25,7 +25,7 @@ pub mod bank_use_civic {
                 ProgramError::InvalidArgument
         })?;
 
-        msg!("Welcome to bank")
+        msg!("Welcome to bank");
         
         Ok(())
     }
