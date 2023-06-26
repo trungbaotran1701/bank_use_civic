@@ -24,6 +24,9 @@ pub mod bank_use_civic {
                 msg!("Gateway token account verification failed");
                 ProgramError::InvalidArgument
         })?;
+
+        msg!("Welcome to bank")
+        
         Ok(())
     }
 }
