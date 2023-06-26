@@ -37,17 +37,6 @@ const mainnetConnection = new Connection(
 
 const Admin = () => {
   const { customer, createNewBank } = useBank();
-  const { connection } = useConnection();
-  const [pot, setPot] = React.useState(0);
-  useEffect(() => {
-    if (customer) {
-      connection.getBalance(customer.bankAddress).then(setPot);
-      connection.onAccountChange(customer.bankAddress, (account) => {
-        setPot(account.lamports);
-      });
-    }
-  }, [customer, connection]);
-
   return (
     <div>
       <h1>Admin Mode</h1>
@@ -60,9 +49,6 @@ const Admin = () => {
             >
               Your Bank
             </a>
-          </div>
-          <div>
-            <>Total pot: {pot}</>
           </div>
         </>
       )}
@@ -100,14 +86,14 @@ const ProfileView = () => {
   );
 };
 
-const Player = () => {
+const Customer = () => {
   const { customer } = useBank();
   const { gatewayStatus, gatewayToken } = useGateway();
   if (!customer) return <></>;
 
   return (
     <div>
-      <h1>Player Mode</h1>
+      <h1>Customer Mode</h1>
       <IdentityButton />
       {gatewayStatus !== GatewayStatus.ACTIVE && (
         <div>Verify you are a unique person before entering</div>
@@ -134,7 +120,7 @@ const Dashboard = () => {
   const isAdminMode =
     customer === undefined || customer.bank.authority.equals(wallet.publicKey);
 
-  return isAdminMode ? <Admin /> : <Player />;
+  return isAdminMode ? <Admin /> : <Customer />;
 };
 
 const Content = () => (
